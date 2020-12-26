@@ -3,8 +3,15 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>home</ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ng-template [ngIf]="this.isLoading" [ngIfElse]="showGameScores">
+    <ion-spinner></ion-spinner>
+  </ng-template>
+  <ng-template #showGameScores>
+    <p>results loaded</p>
+  </ng-template>
+</ion-content>
