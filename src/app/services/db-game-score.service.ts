@@ -17,8 +17,11 @@ export class DbGameScoreService {
         const results = await query.findAll();
         resolve(this.mapQueryResultsToLocalResultSet(results));
       } catch (error) {
-        console.error('Error on Home Page:', error);
-        reject([]);
+        // console.error('Error in getAllGameScores():', error);
+        reject({
+          errorObj: error,
+          resultsArr: [],
+        });
       }
     });
   }

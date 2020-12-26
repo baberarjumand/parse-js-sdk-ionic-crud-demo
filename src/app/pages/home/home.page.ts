@@ -15,16 +15,28 @@ export class HomePage implements OnInit {
 
   constructor(private gameScoreService: DbGameScoreService) {}
 
-  ngOnInit() {
-    this.gameScoreService
-      .getAllGameScores()
-      .then((results) => {
-        this.currentResultSet = results;
-        console.log(this.currentResultSet);
-      })
-      .catch((error) => console.error('Error on Home Page:', error))
-      .finally(() => {
-        this.isLoading = false;
-      });
+  async ngOnInit() {
+    // fetch data using then
+    // this.gameScoreService
+    //   .getAllGameScores()
+    //   .then((results) => {
+    //     this.currentResultSet = results;
+    //     console.log(this.currentResultSet);
+    //   })
+    //   .catch((error) => console.error('Error on Home Page:', error))
+    //   .finally(() => {
+    //     this.isLoading = false;
+    //   });
+
+    // fetch data using async await syntax
+    try {
+      this.currentResultSet = await this.gameScoreService.getAllGameScores();
+      console.log(this.currentResultSet);
+    } catch (errResObj) {
+      console.error('Error on Home Page:', errResObj.errorObj);
+      this.currentResultSet = errResObj.resultsArr;
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
