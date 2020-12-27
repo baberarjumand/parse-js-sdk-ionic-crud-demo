@@ -29,14 +29,61 @@ export class HomePage implements OnInit {
     //   });
 
     // fetch data using async await syntax
+    // try {
+    //   this.currentResultSet = await this.gameScoreService.getAllGameScores();
+    //   console.log(this.currentResultSet);
+    // } catch (errResObj) {
+    //   console.error('Error on Home Page:', errResObj.errorObj);
+    //   this.currentResultSet = errResObj.resultsArr;
+    // } finally {
+    //   this.isLoading = false;
+    // }
+
+    await this.updateCurrentResultSet();
+  }
+
+  async updateCurrentResultSet(): Promise<void> {
+    this.isLoading = true;
+
     try {
       this.currentResultSet = await this.gameScoreService.getAllGameScores();
-      console.log(this.currentResultSet);
+      // console.log(this.currentResultSet);
     } catch (errResObj) {
       console.error('Error on Home Page:', errResObj.errorObj);
       this.currentResultSet = errResObj.resultsArr;
     } finally {
       this.isLoading = false;
+    }
+  }
+
+  async generateNewRandomScore(): Promise<void> {
+    // console.log('Generate new score clicked!');
+    this.isLoading = true;
+
+    try {
+      await this.gameScoreService.addNewRandomGameScore();
+      await this.updateCurrentResultSet();
+    } catch (error) {
+      console.log('Error creating new GameScore:', error);
+    }
+  }
+
+  async randomizeExistingGameScore(gameScoreId: string): Promise<void> {
+    // console.log('randomize clicked with objectId:', gameScoreId);
+    try {
+      await this.gameScoreService.randomizeExistingGameScore(gameScoreId);
+      await this.updateCurrentResultSet();
+    } catch (error) {
+      console.log('Error updating GameScore:', error);
+    }
+  }
+
+  async deleteGameScore(gameScoreId: string): Promise<void> {
+    try {
+      await this.gameScoreService.deleteGameScore(gameScoreId);
+      await this.updateCurrentResultSet();
+    } catch (error) {
+      console.log('Error deleting GameScore:', error);
     }
   }
 }

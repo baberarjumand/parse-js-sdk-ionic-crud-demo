@@ -3,8 +3,75 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>author</ion-title>
+    <ion-title>About</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10" offset="1" size-lg="6" offset-lg="3">
+        <p>
+          This Ionic app is meant to serve as a demo for showcasing basic CRUD
+          operations using the Parse JavaScript SDK.
+        </p>
+        <p>This demo was developed with a Parse server running locally.</p>
+        <p>
+          You can find said server with local settings configured in this
+          <a
+            target="_blank"
+            href="https://github.com/baberarjumand/parse-server-example-with-dashboard"
+            >git repo</a
+          >.
+        </p>
+        <ion-item-divider></ion-item-divider>
+        <h1>Steps to quickstart a Local Parse Server:</h1>
+
+        <p>
+          <b>Step 1:</b><br />
+          Make sure you have the latest versions on Node and MongoDB installed
+          on your local machine.
+        </p>
+        <p>
+          <span>
+            <b>Step 2:</b><br />
+            Clone the repo containing a configured local Parse server:<br />
+          </span>
+        </p>
+        <div
+          style="background-color: #ededed; color: black"
+          class="ion-padding"
+        >
+          <code>
+            git clone
+            https://github.com/baberarjumand/parse-server-example-with-dashboard
+          </code>
+        </div>
+        <p>
+          <span>
+            <b>Step 3:</b><br />
+            Install relevant dependencies:<br />
+          </span>
+        </p>
+        <div
+          style="background-color: #ededed; color: black"
+          class="ion-padding"
+        >
+          <code> npm install </code>
+        </div>
+        <p>
+          <span>
+            <b>Step 4:</b><br />
+            Run the local server:<br />
+          </span>
+        </p>
+        <div
+          style="background-color: #ededed; color: black"
+          class="ion-padding"
+        >
+          <code> npm start </code>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

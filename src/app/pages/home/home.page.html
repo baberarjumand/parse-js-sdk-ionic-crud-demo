@@ -4,6 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="this.generateNewRandomScore()">
+        Generate New Score
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -12,6 +17,49 @@
     <ion-spinner></ion-spinner>
   </ng-template>
   <ng-template #showGameScores>
-    <p>results loaded</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10" offset="1" size-lg="6" offset-lg="3">
+          <ion-row>
+            <ng-template
+              [ngIf]="this.currentResultSet.length > 0"
+              [ngIfElse]="zeroRecordsInDb"
+            >
+              <ion-col
+                size="12"
+                size-lg="6"
+                *ngFor="let score of this.currentResultSet"
+              >
+                <ion-card>
+                  <ion-card-content>
+                    <span>Name: {{ score.playerName }}</span><br />
+                    <span>Score: {{ score.score }}</span><br />
+                    <span>Cheats: {{ score.cheatMode }}</span>
+                    <div class="first-row-styling ion-padding-top">
+                      <ion-button
+                        size="small"
+                        color="danger"
+                        (click)="this.deleteGameScore(score.id)"
+                      >
+                        <ion-icon name="trash"></ion-icon>
+                      </ion-button>
+                      <ion-button
+                        size="small"
+                        (click)="this.randomizeExistingGameScore(score.id)"
+                      >
+                        <ion-icon name="shuffle"></ion-icon>
+                      </ion-button>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ng-template>
+            <ng-template #zeroRecordsInDb>
+              <p>Zero Records found in DB</p>
+            </ng-template>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ng-template>
 </ion-content>
